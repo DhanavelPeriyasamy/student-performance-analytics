@@ -1,22 +1,7 @@
 Student Count = DISTINCTCOUNT(Students[student_id])
-
 Assessment Count = COUNTROWS(Assessments)
-
 Average Score = AVERAGE(Assessments[score])
-
-Pass Rate % =
-DIVIDE(
-    CALCULATE(COUNTROWS(Assessments), Assessments[score] >= 40),
-    [Assessment Count]
-)
-
+Pass Rate % = DIVIDE(CALCULATE(COUNTROWS(Assessments),Assessments[score]>=40),[Assessment Count])
 Average Attendance % = AVERAGE(Students[attendance_pct])
-
 Students Requiring Support Review =
-COUNTROWS(
-    FILTER(
-        VALUES(Students[student_id]),
-        CALCULATE(AVERAGE(Assessments[score])) < 45
-            || CALCULATE(MAX(Students[attendance_pct])) < 75
-    )
-)
+COUNTROWS(FILTER(VALUES(Students[student_id]),CALCULATE(AVERAGE(Assessments[score]))<45 || CALCULATE(MAX(Students[attendance_pct]))<75))
